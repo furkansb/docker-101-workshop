@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  go-app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - REDIS_ADDR=redis:6379
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:6-alpine
+    # If you want external access to Redis (not always recommended in production), you could do:
+    # ports:
+    #   - "6379:6379"
+    restart: always
